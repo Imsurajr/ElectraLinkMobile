@@ -1,4 +1,3 @@
-
 import 'package:electra_link/screens/authentication/authenticationWidgets.dart';
 import 'package:electra_link/utils/constants.dart';
 import 'package:electra_link/utils/widgets/carousalSliders/ImageCarousalWidget.dart';
@@ -26,7 +25,8 @@ class _MainPageState extends State<MainPage> {
         title: Text(
           "ElectraLink",
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white, fontFamily: "MontserratBold", fontSize: 30),
+          style: TextStyle(
+              color: Colors.white, fontFamily: "MontserratBold", fontSize: 30),
         ),
       ),
       body: SingleChildScrollView(
@@ -35,24 +35,37 @@ class _MainPageState extends State<MainPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 20,
-                ),
-                ImageCarousel(),
-                SizedBox(
-                  height: 20,
+                GestureDetector(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    margin: EdgeInsets.all(20),
+                    width: AppConstants.screenWidth(context) * 0.9,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image(
+                        fit: BoxFit.cover,
+                        image: AssetImage("assets/images/img2.jpeg"),
+                        //todo: change it to image you'll be getting
+                      ),
+                    ),
+                  ),
+
+
                 ),
                 IconCarousel(),
                 SizedBox(
                   height: 20,
                 ),
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal:AppConstants.screenWidth(context)*0.05),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: AppConstants.screenWidth(context) * 0.05),
                   child: Container(
-                    height: AppConstants.screenHeight(context)*0.35,
-                    width: AppConstants.screenWidth(context)*0.9,
+                    height: AppConstants.screenHeight(context) * 0.35,
+                    width: AppConstants.screenWidth(context) * 0.9,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         color: kDarkGreenColor),
@@ -82,6 +95,13 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
               ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ImageCarousel(),
+            SizedBox(
+              height: 20,
             ),
           ],
         ),

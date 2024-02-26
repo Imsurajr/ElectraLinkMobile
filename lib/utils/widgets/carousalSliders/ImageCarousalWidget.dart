@@ -43,8 +43,6 @@ class ImageCarousel extends StatelessWidget {
     );
   }
   final List<String> images = [
-    'https://cdn.discordapp.com/attachments/1050749468728893463/1185093093205233694/img1.jpeg?ex=658e5af3&is=657be5f3&hm=327d6e971e754af31336f3164295707213317f7d978f1170a7feb25023e316d6&',
-    'https://cdn.discordapp.com/attachments/1050749468728893463/1185093093687562270/img2.jpeg?ex=658e5af3&is=657be5f3&hm=26d0552242fcd415b26a48251a52fad32c38694f5b2cd5413e7f6aed51206085&',
-    'https://cdn.discordapp.com/attachments/1050749468728893463/1185095937404698695/Best_EV_Stocks_in_India.jpg?ex=658e5d99&is=657be899&hm=0288a5eda7a91b4645e2538fd0a2138d66908ffdb0e7d2542f730e2df7e12c1c&',
-  ];
+    //todo change the link
+    'https://imgs.search.brave.com/W4e9bNucT6ZcpQuM_SVwOH3v4LxCj6ljLQaf8f6Ct_o/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/a2FzYW5kYm94Lm9y/Zy9wcm9ncmFtbWlu/Zy1pbWFnZXMvYXZh/dGFycy9sZWFmZXJz/LXNhcGxpbmcucG5n'];
 }
