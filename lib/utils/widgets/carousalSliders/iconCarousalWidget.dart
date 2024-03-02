@@ -5,7 +5,7 @@ class IconCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 110.0,
+      height: AppConstants.screenHeight(context)*0.15,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [

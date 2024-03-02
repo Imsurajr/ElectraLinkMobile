@@ -1,7 +1,6 @@
-
 import 'package:electra_link/screens/authentication/signupScreen.dart';
 import 'package:electra_link/screens/authentication/welcomeScreen.dart';
-import 'package:electra_link/screens/homeScreen.dart';
+import 'package:electra_link/screens/bottomNavScreens/bottomNavScreen.dart';
 import 'package:electra_link/utils/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
         routes: {
           "/": (context) => WelcomeScreen(),
           "signup": (context) => SignupScreen(),
-          "home": (context) => HomeScreen(),
+          "home": (context) => BottomNavScreen(),
         },
       ),
     );
