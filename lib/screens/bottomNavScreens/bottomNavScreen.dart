@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:electra_link/models/userModel.dart';
 import 'package:electra_link/screens/authentication/loginScreen.dart';

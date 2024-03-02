@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../constants.dart';
+import '../../../constants.dart';
 
-class IconCarousel extends StatelessWidget {
+class IconCarousel1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

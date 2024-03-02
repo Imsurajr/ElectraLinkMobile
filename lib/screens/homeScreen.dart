@@ -1,7 +1,7 @@
 import 'package:electra_link/screens/authentication/authenticationWidgets.dart';
 import 'package:electra_link/utils/constants.dart';
-import 'package:electra_link/utils/widgets/carousalSliders/ImageCarousalWidget.dart';
-import 'package:electra_link/utils/widgets/carousalSliders/iconCarousalWidget.dart';
+import 'package:electra_link/utils/widgets/carousalSliders/IconCarousals/iconCarousalWidget1.dart';
+import 'package:electra_link/utils/widgets/evScoopsWidget/evScoopsWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:maps_launcher/maps_launcher.dart';
@@ -56,7 +56,7 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                 ),
-                IconCarousel(),
+                IconCarousel1(),
                 SizedBox(
                   height: 20,
                 ),
@@ -96,20 +96,69 @@ class _MainPageState extends State<MainPage> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 20,
-            ),
             GestureDetector(
-              //todo on tap it should navigate to second page of bottom nav bar
-              child: ImageCarousel(),
-            ),
-            SizedBox(
-              height: 20,
+              onTap: () {
+                //todo book vehicle page
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                margin: EdgeInsets.all(20),
+                width: AppConstants.screenWidth(context) * 0.9,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image(
+                    fit: BoxFit.cover,
+                    image: AssetImage("assets/images/carousalImage1.jpg"),
+                  ),
+                ),
+              ),
             ),
             Container(
               color: kDarkGreenColor,
-              height: AppConstants.screenHeight(context) * 0.15,
-              child: Row(),
+              height: AppConstants.screenHeight(context) * 0.40,
+              width: AppConstants.screenWidth(context),
+              child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(bottom: 10),
+                      width: AppConstants.screenWidth(context) - AppConstants.screenWidth(context)*0.05,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "EV SCOOPS",
+                            style: TextStyle(
+                              fontFamily: "MontserratSemiBold",
+                              color: Colors.white,
+                              fontSize: 22,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "View all >>",
+                              style: TextStyle(
+                                fontFamily: "MontserratSemiBold",
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child:
+                      EVScoopsList(context),
+                    ),
+                  ],
+                ),
+              ),
             )
           ],
         ),
