@@ -70,7 +70,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.electric_car_outlined),
-            label: 'Vehicle',
+            label: 'My Vehicle',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.qr_code),
@@ -78,7 +78,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.wallet_outlined),
-            label: 'Wallet',
+            label: 'EV Market',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
