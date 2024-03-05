@@ -98,6 +98,8 @@ class _MainPageState extends State<MainPage> {
                                 TextEditingController textController3 =
                                 TextEditingController();
                                 return AlertDialog(
+                                  backgroundColor: kDarkGreenColor,
+                                  surfaceTintColor: Colors.transparent,
                                   title: Text('Enter Journey Details'),
                                   content: Container(
                                     height: 150,
@@ -128,8 +130,6 @@ class _MainPageState extends State<MainPage> {
                                     ),
                                     ElevatedButton(
                                       onPressed: () {
-                                        // Do something with the text input
-
                                           MapsLauncher.launchQuery("find locations with Level 3 EV chargers along route from ${textController1.text} to ${textController2.text} with distance"
                                           );
 

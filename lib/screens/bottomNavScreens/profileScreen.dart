@@ -74,7 +74,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               SizedBox(
                 height: 40,
               ),
-              ProfileWidget("Charge History", "Already have charged 12 times using our app", () {
+              ProfileWidget("Charge History", "Charged 12 times using our app", () {
               },),
               SizedBox(
                 height: 5,

@@ -13,8 +13,8 @@ class IconCarousel1 extends StatelessWidget {
           buildWidgetItem(Icons.star_border_outlined, 'Refer & Earn', context),
           buildWidgetItem(
               Icons.subscriptions_outlined, 'Subscription ', context),
-          buildWidgetItem(Icons.cloud, 'Cloud Icon', context),
-          buildWidgetItem(Icons.settings, 'Settings Icon', context),
+          buildWidgetItem(Icons.cloud, 'Cloud', context),
+          buildWidgetItem(Icons.settings, 'Settings', context),
           SizedBox(width: 20.0),
         ],
       ),
