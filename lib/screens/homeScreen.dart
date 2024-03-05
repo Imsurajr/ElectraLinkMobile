@@ -86,10 +86,82 @@ class _MainPageState extends State<MainPage> {
                         SizedBox(
                           height: 10,
                         ),
-                        RoundedElevatedButton("LAUNCH MAP", kPrimaryColor, () {
-                          MapsLauncher.launchQuery(
-                              'Nearest Electric charging station with distance by car');
-                        }),
+                        RoundedElevatedButton("Plan Journey", kPrimaryColor,
+                              () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                TextEditingController textController1 =
+                                TextEditingController();
+                                TextEditingController textController2 =
+                                TextEditingController();
+                                TextEditingController textController3 =
+                                TextEditingController();
+                                return AlertDialog(
+                                  title: Text('Enter Journey Details'),
+                                  content: Container(
+                                    height: 150,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        TextField(
+                                          controller: textController1,
+                                          decoration: InputDecoration(labelText: 'Source'),
+                                        ),
+                                        TextField(
+                                          controller: textController2,
+                                          decoration: InputDecoration(labelText: 'Destination'),
+                                        ),
+                                        // TextField(
+                                        //   controller: textController3,
+                                        //   decoration: InputDecoration(labelText: 'Charging Remaining(in KMs)'),
+                                        // ),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('Cancel'),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        // Do something with the text input
+
+                                          MapsLauncher.launchQuery("find locations with Level 3 EV chargers along route from ${textController1.text} to ${textController2.text} with distance"
+                                          );
+
+                                        print('Field 1: ${textController1.text}');
+                                        print('Field 2: ${textController2.text}');
+                                        print('Field 3: ${textController3.text}');
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        //         () {
+                        //   MapsLauncher.launchQuery(
+                        //       'Nearest Electric charging station with distance by car');
+                        // }
+                        ),
+
+                        SizedBox(
+                          height: 10,
+                        ),
+                        RoundedElevatedButton("Launch Map", kPrimaryColor,
+
+                                  () {
+                            MapsLauncher.launchQuery(
+                                'Nearest Electric charging station with distance by car');
+                          }
+                        ),
+
                       ],
                     ),
                   ),
