@@ -130,7 +130,9 @@ class _MainPageState extends State<MainPage> {
                                     ),
                                     ElevatedButton(
                                       onPressed: () {
-                                          MapsLauncher.launchQuery("find locations with Level 3 EV chargers along route from ${textController1.text} to ${textController2.text} with distance"
+                                          MapsLauncher.launchQuery(
+                                              // "find locations with Level 3 EV chargers along route from ${textController1.text} to ${textController2.text} with distance"
+                                              "find locations with Level 3 EV chargers along route from ${textController1.text} to ${textController2.text} with car"
                                           );
 
                                         print('Field 1: ${textController1.text}');

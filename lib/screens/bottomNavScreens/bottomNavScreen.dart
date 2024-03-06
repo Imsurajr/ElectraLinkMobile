@@ -7,6 +7,8 @@ import 'package:electra_link/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'myVehical.dart';
+
 class BottomNavScreen extends StatefulWidget {
   late final int selectedIndex;
 
@@ -21,7 +23,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
 
   final List<Widget> _screens = [
     MainPage(),
-    MainPage(),
+    MyVehiclePage(),
     MainPage(),
     MainPage(),
     MyProfileScreen(),
