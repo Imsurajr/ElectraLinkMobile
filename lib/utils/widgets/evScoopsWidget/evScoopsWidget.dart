@@ -71,7 +71,7 @@ Widget EVScoopsList(BuildContext context){
         "Upcoming Ather 450X",
         "If you’re looking to buy an electric scooter, the Ather 450X is one ",
         //of the options. It is sold in 2 variants. Powering the 450X is a 6.4 kW electric motor. The battery capacity of the Ather 450X 3.7 kWh Gen 3 is 3.7 Kwh.The weight of the Ather
-        'https://imgs.search.brave.com/1dzIkViOsaCkcib4PvGcU7PYAqn7b234aXkd5eNiBI8/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9iZC5n/YWFkaWNkbi5jb20v/cHJvY2Vzc2VkaW1h/Z2VzL2F0aGVyLWVu/ZXJneS80NTB4L3Nv/dXJjZS80NTB4NjUw/YTg5MTQ2Y2EwZC5q/cGc',
+        'https://imgs.search.brave.com/3oHPTPiK8Mg39rBG2ssg8z5SEY-z58jN3rnrAqKUTIc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/Y2FyYW5kYmlrZS5j/b20vX25leHQvaW1h/Z2U_dXJsPWh0dHBz/Oi8vaW1hZ2VzLmNh/cmFuZGJpa2UuY29t/L2Jpa2UtaW1hZ2Vz/L2JpZy9hdGhlci80/NTB4L2F0aGVyLTQ1/MHguanBnP3Y9MTQm/dz0zODQwJnE9NzU',
       ),
 
 
