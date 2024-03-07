@@ -84,8 +84,7 @@ class _MyVehiclePageState extends State<MyVehiclePage> {
                   child: Image(
                     width: MediaQuery.of(context).size.width - 100,
                     height: MediaQuery.of(context).size.width - 100,
-                    image: AssetImage("assets/images/addvehical_ev_img.png"),
-
+                    image: AssetImage("assets/images/addvehical_ev_img.png.jpg"),
                   ),
                 ),
                 SizedBox(height: 20), // Add some space between the SVG image and the texts
@@ -103,8 +102,7 @@ class _MyVehiclePageState extends State<MyVehiclePage> {
                                    ),
                  ),
 
-                SizedBox(height: 20), // Add some space at the bottom
-                // Add button here if needed
+                SizedBox(height: 20),
               ],
             ),
           ),

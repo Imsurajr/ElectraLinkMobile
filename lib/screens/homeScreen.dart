@@ -39,7 +39,7 @@ class _MainPageState extends State<MainPage> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    //todo book vehicle page
+                    //todo navigate to EV Scoops page
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -172,7 +172,8 @@ class _MainPageState extends State<MainPage> {
             ),
             GestureDetector(
               onTap: () {
-                //todo book vehicle page
+                Navigator.pushNamed(
+                  context, "vehicle", );
               },
               child: Container(
                 decoration: BoxDecoration(
