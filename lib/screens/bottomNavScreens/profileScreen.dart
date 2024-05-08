@@ -58,15 +58,21 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   SizedBox(
                     width: 20,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text("Suraj Raghuvanshi", style: TextStyle(
-                          fontFamily: "Montserrat-Bold", fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),),
-                      Text(
-                        "suraj.raghuvanshi@vitbhopal.ac.in",style: TextStyle(
-                          fontFamily: "Montserrat-Bold", fontSize: 15, color: Colors.white),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Suraj Raghuvanshi", style: TextStyle(
+                              fontFamily: "Montserrat-Bold", fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),),
+                          Text(
+                            "suraj.raghuvanshi@vitbhopal.ac.in",style: TextStyle(
+                              fontFamily: "Montserrat-Bold", fontSize: 15, color: Colors.white),
+                          ),
+                        ],
                       ),
+                      IconButton(onPressed: () {}, icon: Icon(Icons.edit))
                     ],
                   )
                 ],

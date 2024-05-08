@@ -1,4 +1,5 @@
 import 'package:electra_link/screens/authentication/authenticationWidgets.dart';
+import 'package:electra_link/screens/bottomNavScreens/evMarket.dart';
 import 'package:electra_link/utils/constants.dart';
 import 'package:electra_link/utils/widgets/carousalSliders/IconCarousals/iconCarousalWidget1.dart';
 import 'package:electra_link/utils/widgets/evScoopsWidget/evScoopsWidget.dart';
@@ -213,7 +214,12 @@ class _MainPageState extends State<MainPage> {
                             ),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) =>  EVMarketPage()),
+                            );
+                            },
                             child: Text(
                               "View all >>",
                               style: TextStyle(
@@ -229,7 +235,7 @@ class _MainPageState extends State<MainPage> {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child:
-                      EVScoopsList(context),
+                      EVScoopsHomeList(context),
                     ),
                   ],
                 ),
