@@ -10,7 +10,7 @@ Widget EVScoops(BuildContext context, String title, String desc, String imgUrl) 
         color: Colors.white,
       ),
       height: AppConstants.screenHeight(context) * 0.28,
-      width: AppConstants.screenWidth(context) * 0.37,
+      width: AppConstants.screenWidth(context) * 0.8,
       child: Padding(
         padding: EdgeInsets.all(8.0),
         child: Column(
@@ -38,15 +38,18 @@ Widget EVScoops(BuildContext context, String title, String desc, String imgUrl) 
                 fontSize: 12,
               ),
             ),
-            Text(
-              desc,
-              style: TextStyle(
-                fontFamily: "MontserratSemiBold",
-                color: Colors.grey,
-                fontSize: 12,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+              child: Text(
+                desc,
+                style: TextStyle(
+                  fontFamily: "MontserratSemiBold",
+                  color: Colors.grey,
+                  fontSize: 12,
+                ),
+                softWrap: true,
+                maxLines: 6,
               ),
-              softWrap: true,
-              maxLines: 6,
             ),
           ],
         ),
@@ -56,7 +59,7 @@ Widget EVScoops(BuildContext context, String title, String desc, String imgUrl) 
 }
 
 Widget EVScoopsList(BuildContext context){
-  return Row(
+  return Column(
     children: [
       EVScoops(
         context,
@@ -65,6 +68,7 @@ Widget EVScoopsList(BuildContext context){
         //; not only in the way it looked but also in terms of the kit it packed
         'https://www.uptobrain.com/wp-content/uploads/2021/07/TVS-Creon-Electric-Scooter-Price-in-India.jpg',
       ),
+      Container(height: 10,),
 
       EVScoops(
         context,
@@ -73,7 +77,7 @@ Widget EVScoopsList(BuildContext context){
         //of the options. It is sold in 2 variants. Powering the 450X is a 6.4 kW electric motor. The battery capacity of the Ather 450X 3.7 kWh Gen 3 is 3.7 Kwh.The weight of the Ather
         'https://imgs.search.brave.com/3oHPTPiK8Mg39rBG2ssg8z5SEY-z58jN3rnrAqKUTIc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/Y2FyYW5kYmlrZS5j/b20vX25leHQvaW1h/Z2U_dXJsPWh0dHBz/Oi8vaW1hZ2VzLmNh/cmFuZGJpa2UuY29t/L2Jpa2UtaW1hZ2Vz/L2JpZy9hdGhlci80/NTB4L2F0aGVyLTQ1/MHguanBnP3Y9MTQm/dz0zODQwJnE9NzU',
       ),
-
+      Container(height: 10,),
 
       EVScoops(
         context,
@@ -81,6 +85,7 @@ Widget EVScoopsList(BuildContext context){
         "The Audi A6 e-tron is a concept for now, but Audi says it's super close ",
         'https://imgs.search.brave.com/FN8ef0FHz61_gXSyZRYkG8f9BDT8kSTsVc6Ror3a9CA/rs:fit:500:0:0/g:ce/aHR0cHM6Ly90b3Bl/bGVjdHJpY3N1di5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjIvMDUvQXVkaS1B/Ni1lLXRyb24tY29u/Y2VwdC1mcm9udC10/aHJlZS1xdWFydGVy/LWxpdmUtaW1hZ2Ut/MTAyNHg2ODIuanBn',
       ),
+      Container(height: 10,),
       EVScoops(
         context,
         "Launched Hero Electric Optima",
@@ -88,7 +93,7 @@ Widget EVScoopsList(BuildContext context){
         //It is sold in 2 variants. Powering the Optima is a 1.2 kW electric motor. The weight of the Hero Electric Optima is 102 kg. The Optima comes with a Drum brake up front and Drum brake at the rear. You can buy the Hero Electric Optima in 2 colours - maroon, Blue.
         'https://imgs.search.brave.com/ZqrM_mjphT-kim2fNj3W57i29yKquMzz0gx0Q8R-1nk/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWdk/LmFlcGxjZG4uY29t/LzEwNTZ4NTk0L24v/YncvbW9kZWxzL2Nv/bG9ycy9oZXJvLWVs/ZWN0cmljLXNlbGVj/dC1tb2RlbC1tYXJv/b24tMTY4NTM1NDE3/ODcxNS5wbmc_cT04/MA',
       ),
-
+      Container(height: 10,),
       EVScoops(
         context,
         "Upcoming Ola S1 Pro",

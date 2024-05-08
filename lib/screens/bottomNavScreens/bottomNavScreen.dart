@@ -7,6 +7,7 @@ import 'package:electra_link/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'evMarket.dart';
 import 'myVehical.dart';
 
 class BottomNavScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     MainPage(),
     MyVehiclePage(),
     MainPage(),
-    MainPage(),
+    EVMarketPage(),
     MyProfileScreen(),
   ];
 
