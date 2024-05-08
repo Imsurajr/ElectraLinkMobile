@@ -1,5 +1,6 @@
 import 'package:electra_link/screens/authentication/signupScreen.dart';
 import 'package:electra_link/screens/authentication/welcomeScreen.dart';
+import 'package:electra_link/screens/bottomNavScreens/AddVehical.dart';
 import 'package:electra_link/screens/bottomNavScreens/bottomNavScreen.dart';
 import 'package:electra_link/screens/bottomNavScreens/myVehical.dart';
 import 'package:electra_link/utils/constants.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
           "signup": (context) => SignupScreen(),
           "home": (context) => BottomNavScreen(),
           "vehicle": (context) => MyVehiclePage(),
+          "addVehicle": (context) => AddVehicleScreen(),
         },
       ),
     );

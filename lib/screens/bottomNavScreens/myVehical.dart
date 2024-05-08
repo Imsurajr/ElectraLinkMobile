@@ -1,15 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:electra_link/utils/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'AddVehical.dart';
-// Data models (if applicable)
-class Vehicle {
-  // ... vehicle properties
-}
 
-// class User {
-//   // ... user properties
-// }
+class Vehicle {}
 
-// State provider (if applicable)
 class VehicleDataProvider extends ChangeNotifier {
   List<Vehicle> vehicles = [];
 
@@ -17,8 +13,6 @@ class VehicleDataProvider extends ChangeNotifier {
     vehicles.add(vehicle);
     notifyListeners();
   }
-
-// ... other data management methods
 }
 
 class MyVehiclePage extends StatefulWidget {
@@ -27,22 +21,62 @@ class MyVehiclePage extends StatefulWidget {
 }
 
 class _MyVehiclePageState extends State<MyVehiclePage> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  String _model = "";
+  String _registrationNumber = "";
+  String _phoneNumber = "";
+
+  bool _isLoadingDetails = false;
+  bool check = false;
+  var _userData = {};
+  final _auth = FirebaseAuth.instance;
+
+  void loadUserDetails() async {
+    setState(() {
+      _isLoadingDetails = true;
+    });
+    try {
+      var userSnap = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(_auth.currentUser?.email)
+          .get();
+      if (userSnap.exists) {
+        setState(() {
+          _isLoadingDetails = false;
+        });
+        setState(() {
+          _userData = userSnap.data()!;
+        });
+        _model = _userData['UserVehicle'];
+        _registrationNumber = _userData['RegistrationNumber'];
+        _phoneNumber = _userData['PhoneNumber'];
+        print(
+            "Model : $_model , Reg Num : $_registrationNumber, Phn : $_phoneNumber");
+      }
+    } catch (e) {
+      setState(() {
+        _isLoadingDetails =
+            false; // Ensure to set _isLoadingDetails to false in case of error
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    loadUserDetails();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: Text('Vehicle'),
-    //     actions: [
-    //       IconButton(
-    //         icon: Icon(Icons.add),
-    //         onPressed: () {
-    //           // Add your onPressed functionality here
-    //         },
-    //         color: Colors.green,
-    //       ),
-    //     ],
-    //   ),
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -56,69 +90,100 @@ class _MyVehiclePageState extends State<MyVehiclePage> {
                   MaterialPageRoute(builder: (context) => AddVehicleScreen()),
                 );
               },
-              // style: ElevatedButton.styleFrom(
-              //   primary: Colors.green, // Set the background color to green
-              // ),
-              // child: Text(
-              //   '+ Add',
-              //   style: TextStyle(
-              //     color: Colors.white, // Set the text color to white
-              //   ),
-              // ),
               child: Text('+ Add'),
             ),
           ],
         ),
-        // ... actions (e.g., add button)
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+      body: SingleChildScrollView(
+        child: !_userData.isEmpty
+            ?
+        // _isLoadingDetails
+        //         ? Center(child: CircularProgressIndicator())
+        //         :
+            Column(
               children: [
-                // SVG image
-                Container(
-                  // Replace 'assets/image.svg' with the path to your SVG file
-                  child: Image(
-                    width: MediaQuery.of(context).size.width - 100,
-                    height: MediaQuery.of(context).size.width - 100,
-                    image: AssetImage("assets/images/addvehical_ev_img.png.jpg"),
+                Center(
+                  child: Container(
+                    height: AppConstants.screenHeight(context)*0.15,
+                    width: AppConstants.screenWidth(context)*0.9,
+                    child: ListView(
+                            padding: const EdgeInsets.all(8),
+                            children: <Widget>[
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: kDarkGreenColor),
+                                child: ListTile(
+                                  title: Text("Model: ${_userData['UserVehicle']}", style: TextStyle(
+                                      color: Colors.white, fontFamily: "MontserratBold", fontSize: 25),),
+                                  subtitle: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Registration Number: ${_userData['VehicleRegNumber']}", style: TextStyle(
+                                          color: Colors.white, fontFamily: "MontserratBold", fontSize: 20),),
+                                      Text("Phone Number: ${_userData['PhoneNumber']}", style: TextStyle(
+                                          color: Colors.white, fontFamily: "MontserratBold", fontSize: 20),),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                   ),
                 ),
-                SizedBox(height: 20), // Add some space between the SVG image and the texts
-                // Texts
-                 Center(
-                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
+              ],
+            )
+
+            // ListView(
+            //             itemCount: 1,
+            //             itemBuilder: (BuildContext context, int index) {
+            //               return ListTile(
+            //                 title: Text("Model: $_model"),
+            //                 subtitle: Column(
+            //                   crossAxisAlignment: CrossAxisAlignment.start,
+            //                   children: [
+            //                     Text("Registration Number: $_registrationNumber"),
+            //                     Text("Phone Number: $_phoneNumber"),
+            //                   ],
+            //                 ),
+            //               );
+            //             },
+            //           )
+            : Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: Image(
+                        width: MediaQuery.of(context).size.width - 100,
+                        height: MediaQuery.of(context).size.width - 100,
+                        image: AssetImage(
+                            "assets/images/addvehical_ev_img.png.jpg"),
+                      ),
+                    ),
+                    SizedBox(
+                        height:
+                            20), // Add some space between the SVG image and the texts
+                    // Texts
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
                           'Manage your vehicle at a single place and\n'
                           'Share your vehicle with friends and family\n'
                           '1. Unlock a more immersive experience by adding your vehicle information!\n'
                           '2. Share your vehicle with your loved ones.',
-                      textAlign: TextAlign.center,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
-                                   ),
-                 ),
 
-                SizedBox(height: 20),
-              ],
-            ),
-          ),
-          // Column(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   crossAxisAlignment: CrossAxisAlignment.center,
-          //   children: [
-          //     // Vehicle list or details (if applicable)
-          //     Text('Manage your vehicle at a single place and'),
-          //     Text('Share your vehicle with friends and family'),
-          //     Text('1. Unlock a more immersive experience by adding your vehicle information!'),
-          //     Text('2. Share your vehicle with friends and family.'),
-          //
-          //   ],
-          // ),
-        ),
+                    SizedBox(height: 20),
+                  ],
+                ),
+              ),
       ),
     );
   }

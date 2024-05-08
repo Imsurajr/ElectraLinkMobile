@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:flutter/widgets.dart';
 
 class AddVehicleScreen extends StatefulWidget {
   @override
@@ -8,16 +11,45 @@ class AddVehicleScreen extends StatefulWidget {
 }
 
 class _AddVehicleScreenState extends State<AddVehicleScreen> {
-  String _selectedModel = ""; // Assign an initial value to _selectedModel
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  String _selectedModel = "";
   String _registrationNumber = "";
   String _phoneNumber = "";
-  // List<String> itemList = [];
-  //
-  // void addItemToList() {
-  //   setState(() {
-  //     itemList.add('New Item');
-  //   });
-  // }
+
+  bool _isLoadingDetails = false;
+  bool check = false;
+  var _userData = {};
+  final _auth = FirebaseAuth.instance;
+
+  void loadUserDetails() async {
+    setState(() {
+      _isLoadingDetails = true;
+    });
+    try {
+      var userSnap = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(_auth.currentUser?.email)
+          .get();
+      if (userSnap.exists) {
+        setState(() {
+          _isLoadingDetails = false;
+        });
+        setState(() {
+          _userData = userSnap.data()!;
+        });
+      } else {}
+    } catch (e) {
+      print(e);
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text(e.toString()),
+      //     duration: Duration(seconds: 2),
+      //   ),
+      // );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,22 +69,15 @@ class _AddVehicleScreenState extends State<AddVehicleScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              DropdownTextField(),
-              // DropdownButton(
-              //   hint: Text('Select vehicle model'),
-              //   value: _selectedModel,
-              //   items: ['Car', 'Motorcycle', 'Scooter', 'Others']
-              //       .map((model) => DropdownMenuItem(
-              //     value: model,
-              //     child: Text(model),
-              //   ))
-              //       .toList(),
-              //   onChanged: (value) {
-              //     setState(() {
-              //       _selectedModel = value as String;
-              //     });
-              //   },
-              // ),
+              DropdownTextField(
+                onChanged: (String newValue) {
+                  setState(() {
+                    _selectedModel = newValue;
+                  });
+                },
+              ),
+              Text('Selected Model: $_selectedModel'),
+
               SizedBox(height: 20.0),
               Text(
                 'Registration Number',
@@ -109,33 +134,122 @@ class _AddVehicleScreenState extends State<AddVehicleScreen> {
                 },
               ),
               SizedBox(height: 20.0),
-              // Expanded(
-              //   child: ListView.builder(
-              //     itemCount: itemList.length,
-              //     itemBuilder: (context, index) {
-              //       return ListTile(
-              //         title: Text(itemList[index]),
-              //       );
-              //     },
-              //   ),
-              // ),
+
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  // addItemToList();
+                  print("new value : $_selectedModel ");
+                  if (_selectedModel.length > 0 ||
+                      _registrationNumber.length > 0 ||
+                      _phoneNumber.length == 10) {
+
+                    if (_userData['PhoneNumber'] == null ||
+                        _userData['UserVehicle'] == null||
+                        _userData['VehicleRegNumber'] == null ) {
+                      check = true;
+                    }
+                    if (check) {
+                      Map<String, dynamic> dataToUpdate = {};
+
+                      if (_selectedModel.length > 0) {
+                        dataToUpdate['UserVehicle'] = _selectedModel;
+                      }
+
+                      if (_registrationNumber.length > 0) {
+                        dataToUpdate['VehicleRegNumber'] = _registrationNumber;
+                      }
+
+                      if (_phoneNumber.length == 10) {
+                        dataToUpdate['PhoneNumber'] = _phoneNumber;
+                      }
+
+                      // Update Firestore
+                      _firestore
+                          .collection('users')
+                          .doc(_userData['email'])
+                          .set(dataToUpdate)
+                          .then((value) {
+                        print('User data updated successfully');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('User data updated successfully'),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      }).catchError((error) {
+                        // Show error to user using SnackBar
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Failed to update user data: $error'),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      });
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              'Please provide at least one piece of information'),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    }
+                  } else {
+                    if (!_userData['PhoneNumber'].isNullOrBlank ||
+                        _userData['UserVehicle'].isNullOrBlank ||
+                        _userData['VehicleRegNumber'].isNullOrBlank) {
+                      Map<String, dynamic> dataToUpdate = {};
+
+                      if (_selectedModel.length > 0) {
+                        dataToUpdate['UserVehicle'] = _selectedModel;
+                      }
+
+                      if (_registrationNumber.length > 0) {
+                        dataToUpdate['VehicleRegNumber'] = _registrationNumber;
+                      }
+
+                      if (_phoneNumber.length == 10) {
+                        dataToUpdate['PhoneNumber'] = _phoneNumber;
+                      }
+
+                      _firestore
+                          .collection('users')
+                          .doc(_userData['email'])
+                          .update(dataToUpdate)
+                          .then((value) {
+                        print('User data updated successfully');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('User data updated successfully'),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      }).catchError((error) {
+                        // Show error to user using SnackBar
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Failed to update user data: $error'),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      });
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              'Please provide at least one piece of information'),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    }
+                  }
+                  Future.delayed(Duration(seconds: 4), () {
+                    Navigator.pop(context);
+                  });
                 },
                 child: Text('Submit'),
               ),
 
-              // ElevatedButton(
-              //
-              //   onPressed: () {
-              //     // Add vehicle to database or perform other actions
-              //     // addItemToList
-              //
-              //   },
-              //   child: Text('Submit'),
-              // ),
             ],
           ),
         ),
@@ -144,17 +258,18 @@ class _AddVehicleScreenState extends State<AddVehicleScreen> {
   }
 }
 
-
-
 class DropdownTextField extends StatefulWidget {
+  final Function(String) onChanged;
+
+  const DropdownTextField({Key? key, required this.onChanged})
+      : super(key: key);
+
   @override
   _DropdownTextFieldState createState() => _DropdownTextFieldState();
 }
 
 class _DropdownTextFieldState extends State<DropdownTextField> {
-  // String _selectedOption;
-  // List<String> _options = ['Option 1', 'Option 2', 'Option 3'];
-  String dropdownvalue = 'Item 1';
+  String dropdownValue = 'Tata Nexon EV';
   var items = [
     'Tata Nexon EV',
     'Tata Punch EV',
@@ -162,6 +277,7 @@ class _DropdownTextFieldState extends State<DropdownTextField> {
     'MG Commet EV',
     'OLA S1 X+',
   ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -171,27 +287,28 @@ class _DropdownTextFieldState extends State<DropdownTextField> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           DropdownButtonFormField<String>(
-            items: items.map((String items) {
+            value: dropdownValue,
+            items: items.map((String item) {
               return DropdownMenuItem(
-                value: items,
-                child: Text(items),
+                value: item,
+                child: Text(item),
               );
             }).toList(),
-            // After selecting the desired option,it will
-            // change button value to selected value
             onChanged: (String? newValue) {
               setState(() {
-                dropdownvalue = newValue!;
+                dropdownValue = newValue!;
+                widget.onChanged(
+                    newValue); // Call the callback function with the new value
               });
             },
             decoration: InputDecoration(
-              labelText: 'Select an option',
+              labelText: 'Select a model',
               border: OutlineInputBorder(),
             ),
           ),
           SizedBox(height: 20),
           Text(
-            'Selected Option: ${items ?? "None"}',
+            'Selected Option: $dropdownValue',
             style: TextStyle(fontSize: 16),
           ),
         ],

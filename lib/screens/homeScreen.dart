@@ -173,7 +173,7 @@ class _MainPageState extends State<MainPage> {
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(
-                  context, "vehicle", );
+                  context, "addVehicle", );
               },
               child: Container(
                 decoration: BoxDecoration(

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:electra_link/screens/authentication/loginScreen.dart';
 import 'package:flutter/material.dart';
 import '../../utils/constants.dart';
@@ -169,6 +170,13 @@ class _SignupScreenState extends State<SignupScreen> {
                               email: email,
                               password: password,
                             );
+                            await FirebaseFirestore.instance.collection('users').doc(email).set({
+                              'user_email': email,
+                              'PhoneNumber' : "8817150897",
+                              'VehicleRegNumber' : "VR1",
+                              'UserVehicle' : "Tata Punch EV"
+                              // Add more fields as needed
+                            });
 
                             Navigator.pushNamedAndRemoveUntil(
                                 context, "home", (route) => false);
