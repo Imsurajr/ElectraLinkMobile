@@ -42,17 +42,26 @@ class _MainPageState extends State<MainPage> {
                   onTap: () {
                     //todo navigate to EV Scoops page
                   },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    margin: EdgeInsets.all(20),
-                    width: AppConstants.screenWidth(context) * 0.9,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image(
-                        fit: BoxFit.cover,
-                        image: AssetImage("assets/images/mainPagePhoto1.jpg"),
+                  child: GestureDetector(
+                    onTap: () {
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>  EVMarketPage()),
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      margin: EdgeInsets.all(20),
+                      width: AppConstants.screenWidth(context) * 0.9,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image(
+                          fit: BoxFit.cover,
+                          image: AssetImage("assets/images/mainPagePhoto1.jpg"),
+                        ),
                       ),
                     ),
                   ),
